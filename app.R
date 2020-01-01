@@ -109,9 +109,11 @@ ui <- function() {
                 h1("\n"),
                 h4("Functions of this App:\n"),
                 h4("1. Allow customers to input the name of country and select the year to study on"),
-                h4("2. Exports and imports categories similar to sample deck are available under Components tab"),
-                h4("3. Major international trade of partners and their corresponding proportions are available under Partners tab"),
-                h4("4. Customers could view the actual dataset under Dataset tab. By selecting dataset and type, customers could download corresponding dataset with required format")
+                h4("2. Exports and imports categories are available under Components 'Exports Imports Component Analysis' tab"),
+                h4("3. Major international trade of partners and their corresponding proportions are available under 'International Trade Partners Analysis' tab"),
+                h4("4. Customers could view the actual dataset under Dataset tab. By selecting dataset and type, customers could download corresponding dataset with required format"),
+                br(),
+                h5("Please visit https://github.com/wbteng9526/International-Trade-Application for more details")
               )
               
             )
@@ -538,7 +540,6 @@ server <- function(input, output,session) {
         topexport,"Top Export Partner",icon = icon("thumbs-up", lib = "glyphicon")
         )
     } else {
-      value <- round(sum(importdata$value)/1e9,1)
       valueBox(
         topimport,"Top Import Partner",icon = icon("thumbs-up", lib = "glyphicon")
       )
@@ -562,7 +563,7 @@ server <- function(input, output,session) {
   output$refimptable <- renderTable({
     
     cmd_lut %>%
-      filter(Category == input$exportCat) %>%
+      filter(Category == input$importCat) %>%
       select(-Category)
     
   })
